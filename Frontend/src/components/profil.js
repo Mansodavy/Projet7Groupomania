@@ -101,12 +101,13 @@ const Register = () => {
     //Render the profile of the user
   
   return (
-    <section className="hero has-background has-background-grey-light ">
+    <section className="hero has-background  is-fullheight is-fullwidth has-background-grey-light ">
       
-      <div className="hero-body ">
+      <div className=" ">
         
-          
-          <div className="columns is-centered ">
+          <br/>
+          <br/>
+          <div className="columns is-centered mr-5 ml-5 ">
             
             <div className="column   ">
               <form onSubmit={Editprofil} className="box">
@@ -163,7 +164,7 @@ const Register = () => {
               {/* Rendu du composant EditImage */}
               {/* Rendering EditImage */}
               <EditImage/>
-                
+                <br/>
             </div>
             </div>
           </div>
