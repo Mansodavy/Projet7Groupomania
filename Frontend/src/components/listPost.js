@@ -134,6 +134,7 @@ class Postinfo extends Component {
                                       src={commentaire.user.imageUrl}
                                     />
                                   </p>
+                                  <br/>
                                 </figure>
                                 <div className="media-content">
                                   <div className="field">

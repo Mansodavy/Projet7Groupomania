@@ -87,11 +87,15 @@ exports.editimage = async (req, res) => {
     if (profile.imageUrl) {
       const user = await User.findOne({ where: { id: req.userId } });
       const ancienneimage = user.imageUrl.split("/images/")[1];
+      if (ancienneimage === "Avatar.jpg") {
+        console.log("image inchangée")
+      } else {
       fs.unlink(`images/${ancienneimage}`, (err) => {
         if (err) {
           console.log(err);
         }
       });
+    }
     }
     const user = await User.update(profile, {
       where: { id: req.userId },
