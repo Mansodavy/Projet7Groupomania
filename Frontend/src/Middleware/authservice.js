@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = 'http://localhost:5000/api/auth/';
+const API_URL = "http://localhost:5000/api/auth/";
 class AuthService {
   login(email, password) {
     return axios
@@ -7,7 +7,7 @@ class AuthService {
         email: email,
         password: password,
       })
-      .then(response => {
+      .then((response) => {
         if (response.data.token) {
           localStorage.setItem("user", JSON.stringify(response.data));
           window.location.reload();
@@ -25,11 +25,11 @@ class AuthService {
       email,
       password,
       imageUrl: "http://localhost:5000/images/Avatar.jpg",
-      roles: ["user"]
+      roles: ["user"],
     });
   }
   getCurrentUser() {
-    return JSON.parse(localStorage.getItem('user'));;
+    return JSON.parse(localStorage.getItem("user"));
   }
 }
 export default new AuthService();

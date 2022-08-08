@@ -1,15 +1,15 @@
-import React from 'react'
-import 'react-router-dom'
-import Footer from './Footer'
-import Postinfo from '../components/listPost'
+import React from "react";
+import "react-router-dom";
+import Footer from "./Footer";
+import Postinfo from "../components/listPost";
 
 function Dashboard() {
-    return (
+  return (
     <section>
-    <Postinfo/>
-    <Footer/>
+      <Postinfo />
+      <Footer />
     </section>
-    )
+  );
 }
 
-export default Dashboard
+export default Dashboard;

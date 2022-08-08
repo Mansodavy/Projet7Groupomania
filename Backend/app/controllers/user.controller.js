@@ -12,14 +12,11 @@ exports.getOneUser = (req, res) => {
     where: {
       id: req.userId,
     },
-    attributes: ["id"],
+    attributes: ["id", "nom", "prenom", "imageUrl"],
     include: [
       {
         model: db.role,
-        attributes: ["id", "name"],
-        through: {
-          attributes: [],
-        },
+        attributes: ["name"],
       },
     ],
   })
@@ -43,7 +40,7 @@ exports.editprofil = (req, res) => {
     },
     {
       where: {
-        id: req.userId
+        id: req.userId,
       },
     }
   )
@@ -52,7 +49,9 @@ exports.editprofil = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Une erreur s'est produite lors de la récupération des utilisateurs.",
+        message:
+          err.message ||
+          "Une erreur s'est produite lors de la récupération des utilisateurs.",
       });
     });
 };
@@ -68,39 +67,40 @@ exports.deleteUser = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-        message: err.message || "Une erreur s'est produite lors de la récupération des utilisateurs.",
+        message:
+          err.message ||
+          "Une erreur s'est produite lors de la récupération des utilisateurs.",
       });
     });
 };
 
 exports.editimage = async (req, res) => {
   try {
-  const profile = req.file
-    ? {
-        imageUrl: `${req.protocol}://${req.get('host')}/images/${
-          req.file.filename
-        }`,
-      }
-    : { ...req.body };
+    const profile = req.file
+      ? {
+          imageUrl: `${req.protocol}://${req.get("host")}/images/${
+            req.file.filename
+          }`,
+        }
+      : { ...req.body };
 
-  if (profile.imageUrl) {
-    const user = await User.findOne({ where: { id: req.userId } });
-    const ancienneimage = user.imageUrl.split('/images/')[1];
-    fs.unlink(`images/${ancienneimage}`, (err) => {
-      if (err) {
-        console.log(err);
-      }
+    if (profile.imageUrl) {
+      const user = await User.findOne({ where: { id: req.userId } });
+      const ancienneimage = user.imageUrl.split("/images/")[1];
+      fs.unlink(`images/${ancienneimage}`, (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
     }
-    );
+    const user = await User.update(profile, {
+      where: { id: req.userId },
+    });
+    if (!user) {
+      res.status(404).send();
+    }
+    res.status(200).json({ message: "Image de profile modifiée" });
+  } catch (e) {
+    res.status(500).send(e);
   }
-  const user = await User.update(profile, {
-    where: { id: req.userId },
-  });
-  if (!user) {
-    res.status(404).send();
-  }
-  res.status(200).json({ message: 'Image de profile modifiée' });
-} catch (e) {
-  res.status(500).send(e);
-}
 };

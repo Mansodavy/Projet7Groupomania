@@ -12,8 +12,8 @@ import CreatePosts from "./components/createPost";
 import logo from "./images/icongroupomanianoir.png";
 
 class App extends Component {
- // on bind this to the function to avoid the error of "this is undefined"
- // on bind this a la fonction pour éviter l'erreur de "this est undefined"
+  // on bind this to the function to avoid the error of "this is undefined"
+  // on bind this a la fonction pour éviter l'erreur de "this est undefined"
   constructor(props) {
     super(props);
     this.logOut = this.logOut.bind(this);
@@ -44,7 +44,7 @@ class App extends Component {
   // render is called when the component is rendered
   // render est appelé lorsque le composant est rendu
   render() {
-    const { currentUser, } = this.state;
+    const { currentUser } = this.state;
     return (
       <div>
         <Router>
@@ -55,63 +55,61 @@ class App extends Component {
                 <Link to={{ pathname: "/Dashboard" }} className="navbar-brand">
                   <img
                     className=".container-image ml-6 mr-5 mt-2"
-                    width={150} height={100}
+                    width={150}
+                    height={100}
                     src={logo}
                     alt="Logo Groupomania"
                   />
                 </Link>
               ) : (
                 <div>
-                  <Link to={{ pathname: "/Connexion" }} className="navbar-brand">
+                  <Link
+                    to={{ pathname: "/Connexion" }}
+                    className="navbar-brand"
+                  >
                     <img
                       className=".container-image ml-5 mr-5 mt-2"
-                      width={100} height={100}
+                      width={100}
+                      height={100}
                       src={logo}
                       alt="Logo Groupomania"
                     />
                   </Link>
                 </div>
               )}
-
-
-
-  
-</div>        
-              <div className="navbar-end">
-                <div className="navbar-item">
-                    <div className="navbar-item ">
-                    <div className="">
-                        {/* Si c'est un utilisateur affichée les bouton profil et Déconnexion sinon ne pas affichée de bouton */}
-                        {currentUser ? (
-                          
-                          <div>
-                                                      <div>
-                          </div>
-                            <p className="control">
-                            <a className="navbar-item button is-warning mt-2 mr-3 ml-3 mb-3" href="/Profil">
-                              Profil 
-                            </a>
-                            </p>
-                            <a
-                              className="navbar-item button is-black mr-3 ml-3 mb-3"
-                              href="/Connexion"
-                              onClick={this.logOut}
-                            >
-                              Déconnexion
-                            </a>
-                          </div>
-                        ) : (
-                          <div>
-                            
-                          </div>
-                        )}
-                        </div>
-                        </div>
-                    </div>
+            </div>
+            <div className="navbar-end">
+              <div className="navbar-item">
+                <div className="navbar-item ">
+                  <div className="">
+                    {/* Si c'est un utilisateur affichée les bouton profil et Déconnexion sinon ne pas affichée de bouton */}
+                    {currentUser ? (
+                      <div>
+                        <div></div>
+                        <p className="control">
+                          <a
+                            className="navbar-item button is-warning mt-2 mr-3 ml-3 mb-3"
+                            href="/Profil"
+                          >
+                            Profil
+                          </a>
+                        </p>
+                        <a
+                          className="navbar-item button is-black mr-3 ml-3 mb-3"
+                          href="/Connexion"
+                          onClick={this.logOut}
+                        >
+                          Déconnexion
+                        </a>
+                      </div>
+                    ) : (
+                      <div></div>
+                    )}
+                  </div>
                 </div>
+              </div>
+            </div>
           </nav>
-          
-         
 
           <Routes>
             <Route path="/" element={<Login />} />

@@ -13,7 +13,7 @@ const bcrypt = require("bcryptjs");
 // inscription d'un utilisateur dans la base de données
 // register a user in the database
 exports.signup = async (req, res) => {
-console.log(req.body)
+  console.log(req.body);
   // Save User to Database
   try {
     const user = await User.create({
@@ -38,18 +38,19 @@ console.log(req.body)
           },
         },
       });
-      
+
       const result = user.setRoles(roles);
       if (result) res.send({ message: "Utilisateur enregistré avec succès" });
     } else {
       const result = user.setRoles([1]);
-      if (result) res.send({ message: "L'utilisateur s'est enregistré avec succès !" });
+      if (result)
+        res.send({ message: "L'utilisateur s'est enregistré avec succès !" });
     }
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
 };
-// Connexion d'un utilisateur 
+// Connexion d'un utilisateur
 // Login a user
 exports.signin = async (req, res) => {
   try {

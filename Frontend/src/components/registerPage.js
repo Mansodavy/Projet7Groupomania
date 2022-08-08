@@ -53,21 +53,22 @@ const vprenom = (value) => {
   }
 };
 
-// Validation du formulaire vérification que le mot de passe est valide 
+// Validation du formulaire vérification que le mot de passe est valide
 // Validate the form to check that the password is valid
 const vpassword = (value) => {
   if (value.length < 6 || value.length > 40) {
     return (
       <div className="notification is-danger alert-danger">
-  <button className="delete"></button>
-  Le mot de passe doit comporter entre  <strong>6 et 40</strong>6 et 40 caractères..
-</div>
+        <button className="delete"></button>
+        Le mot de passe doit comporter entre <strong>6 et 40</strong>6 et 40
+        caractères..
+      </div>
     );
   }
 };
 export default class Registrations extends Component {
-// Constructeur de la classe Registrations on l'ont bind les fonctions pour pouvoir les utiliser dans le code  
-// Constructor of the class Registrations on we bind the functions to use them in the code  
+  // Constructeur de la classe Registrations on l'ont bind les fonctions pour pouvoir les utiliser dans le code
+  // Constructor of the class Registrations on we bind the functions to use them in the code
   constructor(props) {
     super(props);
     this.handleRegister = this.handleRegister.bind(this);
@@ -107,7 +108,7 @@ export default class Registrations extends Component {
     });
   }
 
-    // Fonction qui permet de récupérer les données du formulaire Mot de passe et de les stocker dans le state
+  // Fonction qui permet de récupérer les données du formulaire Mot de passe et de les stocker dans le state
   // Function that allows to get the data from the form Password and store it in the state
   onChangePassword(e) {
     this.setState({
@@ -156,7 +157,7 @@ export default class Registrations extends Component {
   render() {
     const user = AuthService.getCurrentUser();
     if (user) {
-     window.location.href = "/Dashboard";
+      window.location.href = "/Dashboard";
     }
     return (
       <section className="hero has-background-grey-lighter is-fullheight is-fullwidth">
@@ -164,8 +165,7 @@ export default class Registrations extends Component {
           className="navbar ml-auto mr-auto"
           role="navigation"
           aria-label="main navigation"
-        >
-        </nav>
+        ></nav>
         <div className="hero-body">
           <div className="container">
             <div className="columns is-centered">
@@ -180,74 +180,81 @@ export default class Registrations extends Component {
                   {!this.state.successful && (
                     <div>
                       <div className="field mt-5">
-                        <label className="label">Nom
-                        <div className="controls">
-                          <input
-                            type="text"
-                            className="input"
-                            required="required"
-                            name="Nom"
-                            placeholder="Marc"
-                            value={this.state.nom}
-                            onChange={this.onChangeNom}
-                            validations={[required, vnom]}
-                          />
-                        </div>
+                        <label className="label">
+                          Nom
+                          <div className="controls">
+                            <input
+                              type="text"
+                              className="input"
+                              required="required"
+                              name="Nom"
+                              placeholder="Marc"
+                              value={this.state.nom}
+                              onChange={this.onChangeNom}
+                              validations={[required, vnom]}
+                            />
+                          </div>
                         </label>
                       </div>
                       <div className="field mt-5">
-                        <label className="label">Prenom
-                        <div className="controls">
-                          <input
-                            type="text"
-                            className="input"
-                            name="Prenom"
-                            required="required"
-                            placeholder="Jean"
-                            value={this.state.prenom}
-                            onChange={this.onChangePrenom}
-                            validations={[required, vprenom]}
-                          />
-                        </div>
+                        <label className="label">
+                          Prenom
+                          <div className="controls">
+                            <input
+                              type="text"
+                              className="input"
+                              name="Prenom"
+                              required="required"
+                              placeholder="Jean"
+                              value={this.state.prenom}
+                              onChange={this.onChangePrenom}
+                              validations={[required, vprenom]}
+                            />
+                          </div>
                         </label>
                       </div>
                       <div className="field mt-5">
-                        <label className="label">Email
-                        <div className="controls">
-                          <input
-                            type="text"
-                            className="input"
-                            name="Email"
-                            required="required"
-                            placeholder="Jean@gmail.com"
-                            value={this.state.email}
-                            onChange={this.onChangeEmail}
-                            validations={[required, email]}
-                          />
-                        </div>
+                        <label className="label">
+                          Email
+                          <div className="controls">
+                            <input
+                              type="text"
+                              className="input"
+                              name="Email"
+                              required="required"
+                              placeholder="Jean@gmail.com"
+                              value={this.state.email}
+                              onChange={this.onChangeEmail}
+                              validations={[required, email]}
+                            />
+                          </div>
                         </label>
                       </div>
                       <div className="field mt-5">
-                        <label className="label">Password
-                        <div className="controls">
-                          <input
-                            type="text"
-                            className="input"
-                            required="required"
-                            name="Password"
-                            placeholder="Mot de passe"
-                            value={this.state.password}
-                            onChange={this.onChangePassword}
-                            validations={[required, vpassword]}
-                          />
-                        </div>
+                        <label className="label">
+                          Password
+                          <div className="controls">
+                            <input
+                              type="password"
+                              className="input"
+                              required="required"
+                              name="Password"
+                              placeholder="Mot de passe"
+                              value={this.state.password}
+                              onChange={this.onChangePassword}
+                              validations={[required, vpassword]}
+                            />
+                          </div>
                         </label>
                       </div>
 
                       <div className="field mt-5">
                         <button className="button is-link is-fullwidth">
                           Inscription
-                          <CheckButton style={{ display: "none" }} ref={(c) => (this.checkBtn = c)}/>
+                          <CheckButton
+                            style={{ display: "none" }}
+                            ref={(c) => (this.checkBtn = c)}
+                          />
                         </button>
                       </div>
                     </div>
@@ -266,7 +273,6 @@ export default class Registrations extends Component {
                       </div>
                     </div>
                   )}
-                  
                           
                   <Link
                     to={{

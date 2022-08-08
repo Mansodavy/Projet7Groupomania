@@ -3,7 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const path = require("path");
-require('dotenv').config()
+require("dotenv").config();
 const app = express();
 // Options for cors
 // Options pour cors
@@ -27,7 +27,7 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(
   cookieSession({
     name: "Groupomania-session",
-    secret: process.env.GROUPOMANIA_COOKIESECRETKEY, 
+    secret: process.env.GROUPOMANIA_COOKIESECRETKEY,
     httpOnly: true,
     sameSite: "strict",
   })
