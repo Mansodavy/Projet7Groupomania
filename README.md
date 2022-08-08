@@ -24,7 +24,7 @@ Réseaux social d'entreprise
 ```bash
   cd Backend  
   npm install  
-  Crée la base de données sous le nom groupomania  
+  Crée la base de données 
   Remplir le .env avec les informations nécessaires  
   nodemon serveur ou npm start pour lancer l'api ça permettra de crée les tables dans la base de données  
   Importer le fichier groupomania.sql qui contient toutes les tables et 3 utilisateurs 1 admin et 2 membres et ajoute les Rank disponible 
