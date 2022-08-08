@@ -41,88 +41,88 @@ const NewCreatepost = (props) => {
   // Rendering of the NewCreatePost component
   return (
     <section className="hero has-background is-fullheight is-fullwidth has-background-grey-light ">
-      <br/>
+      <br />
 
-<a
-                              className=" button is-link mt-2 mr-5 ml-5 "
-                              href="http://localhost:3000/Dashboard"
-                            >
-                              Liste des postes
-                            </a>
-      <br/>
+      <a
+        className=" button is-link mt-2 mr-5 ml-5 "
+        href="http://localhost:3000/Dashboard"
+      >
+        Liste des postes
+      </a>
+      <br />
 
-            <div className="column is-centered is-desktop mr-3 ml-3">
-              <form onSubmit={createPost} className="box">
-                <label className="label has-text-centered">
-                  Formulaire de création de post
-                </label>
-                <div className="field mt-5">
-                  <label className="label has-text-centered">
-                    Ajouter une image
-                    
-                    <div className="  controls ">
-                    <br/>
+      <div className="column is-centered is-desktop mr-3 ml-3">
+        <form onSubmit={createPost} className="box">
+          <label className="label has-text-centered">
+            Formulaire de création de post
+          </label>
+          <div className="field mt-5">
+            <label className="label has-text-centered">
+              Ajouter une image
+              <div className="  controls ">
+                <br />
 
-                      <div className="file is-centered is-boxed  ">
-                          <input className="form-input file-input" type="file"  name="imageUrl"
-                          accept=".jpg, .jpeg, .png, .gif"
-                          onChange={(e) => {
-                            setNewPic(e.target.files[0]);
-                          }}/>
-                          <span className="file-cta">
-                            <span className="file-icon">
-                              <i className="fas fa-upload" />
-                            </span>
-                            <span className="file-label">
-                              
-                            {newPic ? newPic.name : "Aucun fichier sélectionné"}
-                            </span>
-                          </span>
+                <div className="file is-centered is-boxed  ">
+                  <input
+                    className="form-input file-input"
+                    type="file"
+                    name="imageUrl"
+                    accept=".jpg, .jpeg, .png, .gif"
+                    onChange={(e) => {
+                      setNewPic(e.target.files[0]);
+                    }}
+                  />
+                  <span className="file-cta">
+                    <span className="file-icon">
+                      <i className="fas fa-upload" />
+                    </span>
+                    <span className="file-label">
+                      {newPic ? newPic.name : "Aucun fichier sélectionné"}
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </label>
+          </div>
+          <div className="field mt-5">
+            <label className="label has-text-centered">
+              Nom du poste
+              <div className="controls">
+                <br />
+                <input
+                  type="text"
+                  className="input"
+                  placeholder="ex: Le nom du poste"
+                  value={nomposte}
+                  onChange={(e) => setnomposte(e.target.value)}
+                />
+              </div>
+            </label>
+          </div>
+          <div className="field mt-5">
+            <label className="label has-text-centered">
+              Contenue du poste
+              <div className="field">
+                <br />
+                <div className="control">
+                  <textarea
+                    className="textarea"
+                    placeholder="ex: Je suis un étudiant en informatique"
+                    value={messagepost}
+                    onChange={(e) => setmessagepost(e.target.value)}
+                  ></textarea>
+                </div>
+              </div>
+            </label>
+          </div>
 
-                      </div>
-                      
-                    </div>
-                    </label>
-                </div>
-                <div className="field mt-5">
-                  <label className="label has-text-centered">Nom du poste
-                  <div className="controls">
-                  <br/>
-                    <input
-                      type="text"
-                      className="input"
-                      placeholder="ex: Le nom du poste"
-                      value={nomposte}
-                      onChange={(e) => setnomposte(e.target.value)}
-                    />
-                  </div>
-                  </label>
-                </div>
-                <div className="field mt-5">
-                  <label className="label has-text-centered">
-                    Contenue du poste
-                  
-                  <div className="field">
-                    <br/>
-                    <div className="control">
-                      <textarea
-                        className="textarea"
-                        placeholder="ex: Je suis un étudiant en informatique"
-                        value={messagepost}
-                        onChange={(e) => setmessagepost(e.target.value)}
-                      ></textarea>
-                    </div>
-                  </div>
-                  </label>
-                </div>
-                
-                <div className="field mt-5">
-                  <button type="submit" className="button is-link is-fullwidth">
-                    Crée le poste
-                  </button>
-                </div>
-              </form>
-        </div>
+          <div className="field mt-5">
+            <button type="submit" className="button is-link is-fullwidth">
+              Crée le poste
+            </button>
+          </div>
+        </form>
+      </div>
       <footer>
         <Footer />
       </footer>

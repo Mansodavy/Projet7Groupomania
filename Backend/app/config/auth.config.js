@@ -1,3 +1,3 @@
 module.exports = {
-    secret: process.env.GROUPOMANIA_SECRETKEY
-  };
+  secret: process.env.GROUPOMANIA_SECRETKEY,
+};

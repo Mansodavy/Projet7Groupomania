@@ -31,45 +31,44 @@ exports.createPosts = async (req, res) => {
 // Update a post with image
 // Met à jour un post avec une image
 exports.Editpostwithimage = async (req, res) => {
-	try {
+  try {
     // Verify if the image is uploaded
     // Vérifie si l'image est uploadée
-		const postObject = req.file
-			// if the image is uploaded then update the post with the image
-      // Si l'image est uploadée alors met à jour le post avec l'image
-    ? {
-					...req.body,
-					imageUrl: `${req.protocol}://${req.get('host')}/images/${
-						req.file.filename
-					}`,
-			  }
-			// if the image is not uploaded then update the post without the image
-      //  Si l'image n'est pas uploadée alors met à jour le post sans l'image
-        : { ...req.body };
+    const postObject = req.file
+      ? // if the image is uploaded then update the post with the image
+        // Si l'image est uploadée alors met à jour le post avec l'image
+        {
+          ...req.body,
+          imageUrl: `${req.protocol}://${req.get("host")}/images/${
+            req.file.filename
+          }`,
+        }
+      : // if the image is not uploaded then update the post without the image
+        //  Si l'image n'est pas uploadée alors met à jour le post sans l'image
+        { ...req.body };
 
-		if (postObject.imageUrl) {
+    if (postObject.imageUrl) {
       // delete the old image
       // Supprime l'ancienne image
-			const oldPost = await Post.findOne({ where: { id: req.params.id } });
-      const oldFile = oldPost.imageUrl.split('/images/')[1];
+      const oldPost = await Post.findOne({ where: { id: req.params.id } });
+      const oldFile = oldPost.imageUrl.split("/images/")[1];
       fs.unlink(`images/${oldFile}`, (err) => {
         if (err) {
           console.log(err);
         }
-      }
-      );
-		}
-		const post = await Post.update(postObject, {
-			where: { id: req.params.id },
-		});
-		if (!post) {
-			res.status(404).send();
-		}
-		res.status(200).json({ message: 'Post modifié' });
-	} catch (e) {
-		console.log(e);
-		res.status(500).send(e);
-	}
+      });
+    }
+    const post = await Post.update(postObject, {
+      where: { id: req.params.id },
+    });
+    if (!post) {
+      res.status(404).send();
+    }
+    res.status(200).json({ message: "Post modifié" });
+  } catch (e) {
+    console.log(e);
+    res.status(500).send(e);
+  }
 };
 // Retrieve all posts from the database.
 // Récupère tous les posts de la base de données.
@@ -81,37 +80,31 @@ exports.getAllPosts = async (req, res) => {
           // Include the user who created the post
           // Inclure l'utilisateur qui a créé le post
           model: db.user,
-          
-          attributes: ["id", "nom", "prenom", "imageUrl"],
 
-        
+          attributes: ["id", "nom", "prenom", "imageUrl"],
         },
-          { 
-            model: db.comments,
-            limit : 2,
-            // Include the 2 last comments of the post
-            // Inclure les 2 derniers commentaires du post
-            include: [ {model: db.user, attributes: ["id", "nom", "prenom", "imageUrl"]}],
-            order: [
-              ['createdAt', 'DESC']
-            ],
-          } ,
-          
-          
+        {
+          model: db.comments,
+          limit: 2,
+          // Include the 2 last comments of the post
+          // Inclure les 2 derniers commentaires du post
+          include: [
+            { model: db.user, attributes: ["id", "nom", "prenom", "imageUrl"] },
+          ],
+          order: [["createdAt", "DESC"]],
+        },
       ],
-      order : [
-        ['createdAt', 'DESC']
-      ]
+      order: [["createdAt", "DESC"]],
     });
-	if (posts.length === 0) {
-    // If no posts are found, send a message 
-    // Si aucun post n'est trouvé, envoyer un message
-		res.status(200).send({ message: "Aucun post trouvé" });
-	}else {
-    // If posts are found, send them
-    // Si des posts sont trouvés, les envoyer
-		res.status(200).send(posts);
-	}
+    if (posts.length === 0) {
+      // If no posts are found, send a message
+      // Si aucun post n'est trouvé, envoyer un message
+      res.status(200).send({ message: "Aucun post trouvé" });
+    } else {
+      // If posts are found, send them
+      // Si des posts sont trouvés, les envoyer
+      res.status(200).send(posts);
+    }
   } catch (e) {
     res.status(400).send(e);
   }
@@ -161,14 +154,11 @@ exports.getOnePosts = async (req, res) => {
           // Inclure les commentaires du post
           model: db.comments,
           include: [db.user],
-
         },
-        
       ],
       where: {
         id: req.params.id,
       },
-
     });
     res.status(200).send(post);
   } catch (e) {
@@ -217,14 +207,14 @@ exports.deletePosts = async (req, res) => {
           id: req.params.id,
         },
       });
-          // Delete the image of the post
-    // Supprime l'image du post
-    
-    const fileName = post.imageUrl.split('images/')[1];
-    if (fileName) {
-      fs.unlinkSync(`images/${fileName}`);
-    }
-    res.status(200).send({ message: "Post Supprimée" });
+      // Delete the image of the post
+      // Supprime l'image du post
+
+      const fileName = post.imageUrl.split("images/")[1];
+      if (fileName) {
+        fs.unlinkSync(`images/${fileName}`);
+      }
+      res.status(200).send({ message: "Post Supprimée" });
     } else {
       res.status(404).send({ message: "Post introuvable" });
     }

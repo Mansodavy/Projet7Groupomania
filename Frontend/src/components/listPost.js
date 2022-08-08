@@ -1,46 +1,46 @@
-import React, { Component } from 'react'
-import 'react-router-dom'
-import axios from 'axios'
-import {  Link } from 'react-router-dom'
-const API_URL = 'http://localhost:5000/api/'
+import React, { Component } from "react";
+import "react-router-dom";
+import axios from "axios";
+import { Link } from "react-router-dom";
+const API_URL = "http://localhost:5000/api/";
 
 class Postinfo extends Component {
   // On definit le state de notre composant Postinfo pour stocker les posts
   // we define the state of our Postinfo component to store the posts
   state = {
     posts: [],
-  }
+  };
   // fetching the posts
   // On appelle la fonction getPosts() quand le composant est chargé
   componentDidMount() {
-    this.getPosts()
+    this.getPosts();
   }
 
   // fetching the posts from the API and storing them in the state to be displayed
   // Récupération des posts stockage dans le state pour afficher les posts
   getPosts() {
-    const user = JSON.parse(localStorage.getItem('user'))
+    const user = JSON.parse(localStorage.getItem("user"));
     axios
-      .get(API_URL + 'posts', {
+      .get(API_URL + "posts", {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
       })
 
       .then((res) => {
-        this.setState({ posts: res.data })
+        this.setState({ posts: res.data });
       })
       .catch((err) => {
-        console.log(err)
-        window.localStorage.removeItem('user')
-        window.location.replace('/Connexion')
-      })
+        console.log(err);
+        window.localStorage.removeItem("user");
+        window.location.replace("/Connexion");
+      });
   }
 
   // Renderings of posts and the last 3 comments associated with each post
   // Rendu des posts et des 3 dernier commentaires associés à chaque post
   render() {
-    let { posts } = this.state
+    let { posts } = this.state;
     return (
       <div className="hero has-background-grey-light is-fullheight">
         <div className="ml-6 mr-6  hero has-background-grey-light">
@@ -69,7 +69,7 @@ class Postinfo extends Component {
                     <br />
                     <Link
                       to={{
-                        pathname: '/posts/' + post.id,
+                        pathname: "/posts/" + post.id,
                       }}
                     >
                       <section key={post.id}>
@@ -79,18 +79,19 @@ class Postinfo extends Component {
                           <div className="column is-mobile">
                             <div className="box content">
                               <article className="post">
-                              <p className="image is-64x64 is-inline-block">
-                                    <img
-                                      width={64}
-                                      height={64}
-                                      alt={post.user.prenom}
-                                      src={post.user.imageUrl}
-                                    />
-                                    <strong>{post.user.nom} <br />
-                                    {post.user.prenom}</strong>
-                                  </p>
+                                <p className="image is-64x64 is-inline-block">
+                                  <img
+                                    width={64}
+                                    height={64}
+                                    alt={post.user.prenom}
+                                    src={post.user.imageUrl}
+                                  />
+                                  <strong>
+                                    {post.user.nom} <br />
+                                    {post.user.prenom}
+                                  </strong>
+                                </p>
                                 <div className="card-image has-text-centered ">
-                                  
                                   <figure className="image is-128x128 is-inline-block">
                                     <img
                                       width={500}
@@ -98,20 +99,17 @@ class Postinfo extends Component {
                                       alt={post.nomposte}
                                       src={post.imageUrl}
                                     ></img>
-                                    
                                   </figure>
-                                  
                                 </div>
-                                
+
                                 <h4 className="has-text-centered">
                                   <strong>{post.nomposte}</strong>
                                 </h4>
-                                
+
                                 <p className="has-text-centered">
                                   {post.messagepost}
                                 </p>
                               </article>
-                              
                             </div>
                           </div>
                         </div>
@@ -140,19 +138,15 @@ class Postinfo extends Component {
                                 <div className="media-content">
                                   <div className="field">
                                     <p>
-
-                                      <strong>
-                                        {commentaire.user.nom}
-                                      </strong>{' '}
+                                      <strong>{commentaire.user.nom}</strong>{" "}
                                       <strong>{commentaire.user.prenom}</strong>
                                       <br />
                                       {commentaire.commentaire}
-
                                     </p>
                                   </div>
                                 </div>
                               </article>
-                            )
+                            );
                           })
                         ) : (
                           // Si il n'y a pas de commentaire on affiche que le poste avec un message Aucun commentaire
@@ -178,7 +172,7 @@ class Postinfo extends Component {
 
                     <br />
                   </section>
-                )
+                );
               })
             ) : (
               // Si il n'y a pas de post on affiche un message "Il n'y a pas de post pour le moment" avec un bouton vers le profile
@@ -196,7 +190,7 @@ class Postinfo extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
-export default Postinfo
+export default Postinfo;

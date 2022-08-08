@@ -3,12 +3,10 @@ import "react-router-dom";
 import axios from "axios";
 import Footer from "../View/Footer";
 import swal from "sweetalert";
-import { Link  } from "react-router-dom";
-const API_URL = 'http://localhost:5000/api/';
-
+import { Link } from "react-router-dom";
+const API_URL = "http://localhost:5000/api/";
 
 class Post extends Component {
-
   constructor(props) {
     super(props);
     this.state = { isPost: false };
@@ -47,7 +45,7 @@ class Post extends Component {
         window.location.replace("/Connexion");
       });
   }
-  // render des post et des commentaires associés au post 
+  // render des post et des commentaires associés au post
   // render of post and comments associated to the post
   render() {
     // Fonction de suppression de Commentaire avec swal pour confirmation
@@ -100,16 +98,14 @@ class Post extends Component {
                 Authorization: `Bearer ${user.token}`,
               },
             })
-            .then((res) => {
-            });
+            .then((res) => {});
           swal(
             "Le post a été supprimée avec succés !",
             {
               icon: "success",
             },
             window.location.replace("/")
-            );
-
+          );
         } else {
           swal("La suppression du post a été annulée !");
         }
@@ -134,15 +130,11 @@ class Post extends Component {
           post_id: postid,
         };
         await axios
-          .post(
-            "http://localhost:5000/api/posts/comments/" + postid ,
-            data,
-            {
-              headers: {
-                Authorization: `Bearer ${user.token}`,
-              },
-            }
-          )
+          .post("http://localhost:5000/api/posts/comments/" + postid, data, {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          })
           .then((res) => {
             swal("Bien jouer!", "Tu a postée un commentaire", "success").then(
               (value) => {
@@ -158,93 +150,96 @@ class Post extends Component {
         swal("Veuillez remplir le commentaire");
       }
     };
-    // Si il y a un post on affiche le post et les commentaires associés 
+    // Si il y a un post on affiche le post et les commentaires associés
     // if there is a post we display the post and the comments associated
     if (isPost) {
       return (
         <section key={posts.id} className="has-background-grey-light">
           <div className="container ">
-          <br />
+            <br />
 
-<a href="/Dashboard">
-  <button
-    className="
+            <a href="/Dashboard">
+              <button
+                className="
        button is-link is-fullwidth  "
-  >
-    Liste des postes
-  </button>
-</a>
-<br />
-</div>
+              >
+                Liste des postes
+              </button>
+            </a>
+            <br />
+          </div>
 
           <div className="columns">
-            
-          <div className="column is-half">
-            
-            <div className="card is-shady my-3 ml-3 mr-3">
-              <div className="card-image">
-                
-                <figure className="image is-4by3">
-                  <img
-                  width={500}
-                    src={posts.imageUrl}
-                    alt={posts.imageUrl}
-                    className="modal-button"
-                    data-target="modal-image2"
-                  />
-                </figure>
-              </div>
-              <div className="card-content">
-                <div className="content">
-                  <h4>{posts.nomposte}</h4>
-                  <p>{posts.messagepost}</p>
-                  <br/>
+            <div className="column is-half">
+              <div className="card is-shady my-3 ml-3 mr-3">
+                <div className="card-image">
+                  <figure className="image is-4by3">
+                    <img
+                      width={500}
+                      src={posts.imageUrl}
+                      alt={posts.imageUrl}
+                      className="modal-button"
+                      data-target="modal-image2"
+                    />
+                  </figure>
+                </div>
+                <div className="card-content">
+                  <div className="content">
+                    <h4>{posts.nomposte}</h4>
+                    <p>{posts.messagepost}</p>
+                    <br />
 
-                  <div className="field" >
-                  <label className="label  " >  Ajoutée un commentaire
-                    <p className="control">
-                      <br/>
-                      <textarea
-                        className="textarea"
-                        placeholder="Add a comment..."
-                        value={this.state.commentaire}
-                        onChange={this.changeCommentaire}
-                      ></textarea>
-                    </p>
-                    </label>
-                  </div>
-                  <span
-                    onClick={commentpost} className="button is-link modal-button"
-                    data-target="modal-image2"
-                  >
-                    Poster un commentaire
-                  </span>
-                  {(user.id === posts.userId ||
-                            user.roles[0] === "ROLE_ADMIN") && (
                     <div className="field">
-                  <span
-                    id={posts.id}
-                    onClick={handlePostremove} className="button is-black modal-button  mt-3 mr-3" 
-                    data-target="modal-image2"
-                  >
-                    Supprimer le poste
-                  </span>
-                  <Link
-                  to={{
-                  pathname: "/posts/edit/" + posts.id,
-                  }}>
-          <span
-                    id={posts.id}
-                    className="button is-warning modal-button mt-3"
-                    data-target="modal-image2"
-                  >
-                    Editer Le Poste
-                  </span>          </Link>
-                            </div>
-                          )}
+                      <label className="label  ">
+                        {" "}
+                        Ajoutée un commentaire
+                        <p className="control">
+                          <br />
+                          <textarea
+                            className="textarea"
+                            placeholder="Add a comment..."
+                            value={this.state.commentaire}
+                            onChange={this.changeCommentaire}
+                          ></textarea>
+                        </p>
+                      </label>
+                    </div>
+                    <span
+                      onClick={commentpost}
+                      className="button is-link modal-button"
+                      data-target="modal-image2"
+                    >
+                      Poster un commentaire
+                    </span>
+                    {(user.id === posts.userId ||
+                      user.roles[0] === "ROLE_ADMIN") && (
+                      <div className="field">
+                        <span
+                          id={posts.id}
+                          onClick={handlePostremove}
+                          className="button is-black modal-button  mt-3 mr-3"
+                          data-target="modal-image2"
+                        >
+                          Supprimer le poste
+                        </span>
+                        <Link
+                          to={{
+                            pathname: "/posts/edit/" + posts.id,
+                          }}
+                        >
+                          <span
+                            id={posts.id}
+                            className="button is-warning modal-button mt-3"
+                            data-target="modal-image2"
+                          >
+                            Editer Le Poste
+                          </span>{" "}
+                        </Link>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
             </div>
             <div className="column ">
               <article>
@@ -261,7 +256,8 @@ class Post extends Component {
                                     <div className="media-content">
                                       <div className="content">
                                         <h4>
-                                          {comment.user.nom} {comment.user.prenom}
+                                          {comment.user.nom}{" "}
+                                          {comment.user.prenom}
                                         </h4>
                                         <p>{comment.commentaire}</p>
                                       </div>
@@ -299,7 +295,7 @@ class Post extends Component {
                 )}
               </article>
             </div>
-            </div>
+          </div>
           <br />
           <Footer />
         </section>
