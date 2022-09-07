@@ -42,9 +42,13 @@ db.user.hasMany(db.posts, {
 db.posts.belongsTo(db.user, {});
 // Relation between comments and users
 // Relation entre les commentaires et les utilisateurs
-db.comments.belongsTo(db.user, {});
+db.comments.belongsTo(db.user, {
+  onDelete: "cascade",
+  
+});
 db.user.hasMany(db.comments, {
   onDelete: "cascade",
+
 });
 // Relation between comments and posts
 // Relation entre les commentaires et les posts
